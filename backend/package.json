@@ -8,13 +8,15 @@
   "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "multer": "^1.4.5-lts.2",
-    "nodemon": "^3.1.9",
     "uuid": "^11.1.0"
   },
   "scripts": {
-    "dev": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/app.js",
+    "docker-build:dev": "docker build -t node-api-image-dev:1.1 -f Dockerfile.dev .",
+    "docker-run:dev": "docker run -it -p 5000:5000 --name node-api-dev -v C:/Users/Dell/Desktop/projects/my-app/backend/:/app  -v my-node-modules:/app/node_modules node-api-image-dev:1.1"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "eslint": "^9.24.0",
-    "globals": "^16.0.0"
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9"
   }
 }

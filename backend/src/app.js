@@ -3,37 +3,36 @@ import cors from 'cors'; // Import the cors package
 import multer from 'multer'; // Import multer for handling file uploads
 import fs from 'fs'; // To read the uploaded files (for example, JSON files)
 import path from 'path'; // Import path for resolving file paths
+import dotenv from 'dotenv'; // Import dotenv for environment variables
 import { v4 as uuidv4 } from 'uuid'; // Ensure to import uuid at the top of the file
 
 const app = express();
-const port = 3000;
+
+dotenv.config(); // Load environment variables from .env file
+const PORT = process.env.PORT;
 let items = [];
 
 
+
 let price = 0;
-    let name = '';
-    let discount = 0;
-    let date = '';
-    let receipt = '';
+let name = '';
+let discount = 0;
+let date = '';
+let receipt = '';
 
-
-//const fileName =  `bill-${uniqueId}.json`
-
-
+// Multer storage configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads'); // Set the upload directory
   },
   filename: function (req, file, cb) {
-    //const uniqueId = uuidv4();
     const uniqueId = Date.now(); // Use a simple unique ID based on the current timestamp
     const fileName = `bill-${uniqueId}.json`; // Create a unique file name
     cb(null, fileName); // Pass the unique file name to multer
   }
 });
 
-
-const upload = multer({ 
+const upload = multer({
   storage: storage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB limit
   fileFilter: (req, file, cb) => {
@@ -44,30 +43,23 @@ const upload = multer({
   }
 });
 
-
-
-
-
 // CORS configuration
 app.use(cors({
-  origin: ['http://127.0.0.1:5173', 'http://localhost:5173', 'http://10.233.61.83:5173' ], // Allow both origins
+  origin: ['http://127.0.0.1:5173', 'http://localhost:5173', 'http://10.233.61.83:5173'], // Allow both origins
 }));
 
-
-
+// POST route for file uploads
 app.post('/api/uploads', upload.single('file'), (req, res) => {
- 
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
 
   const filePath = path.join('./uploads', req.file.filename);
- 
-    
+
   try {
     // Read the JSON file using fs
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const jsonItems = JSON.parse(fileContent); // Parse the JSON content into Js object "jsonItems" 
+    const jsonItems = JSON.parse(fileContent); // Parse the JSON content into JS object "jsonItems"
 
     // Process the JSON file and extract items
     const array = jsonItems.body;
@@ -94,7 +86,6 @@ app.post('/api/uploads', upload.single('file'), (req, res) => {
           year: 'numeric',
           hour: '2-digit',
           minute: '2-digit',
-          
         }).replace(',', ''); // Format date as dd-mm-yyyy time
 
         const [day, time] = formattedDate.split(' ');
@@ -111,29 +102,21 @@ app.post('/api/uploads', upload.single('file'), (req, res) => {
     });
 
     res.json(receipt); // Send the processed receipt data as JSON
-    
   } catch (error) {
     console.error('Error loading file:', error);
     res.status(500).send('Error loading file');
   }
- 
-
 });
-
-
-
 
 // GET Route to fetch receipt data
 app.get('/', (req, res) => {
- 
   res.json({
-   day: date,
+    day: date,
     items: items,
-   });
+  });
 });
 
-
-
-app.listen(port, () => {
-  console.log(`Express app listening at http://localhost:${port}`);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Express app listening at http://localhost:${PORT}`);
 });
