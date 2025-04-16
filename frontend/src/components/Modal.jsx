@@ -16,7 +16,7 @@ function Modal({ receipt,  dispatch, setIsConfirmedAndStore }) {
 
         {/* Receipt Details */}
         <div className="bg-purple-900 h-[100%] p-5 overflow-y-scroll scrollbar rounded-b-xl">
-          {receipt && (
+          {receipt?.date && (
             <div className="mb-5 mt-4 text-xl text-green-500 font-semibold">
               {receipt.date.day} - - {receipt.date.time}
             </div>

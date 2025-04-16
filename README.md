@@ -1,59 +1,66 @@
 # SplitEase
 
-**SplitEase** is a web app designed to make dividing bills easy for friends sharing the same receipt! It is a full-stack web app built with **Vite + React** for the frontend and **Node.js** for the backend. The app is fully containerized using **Docker**.
+**SplitEase** is a web application designed to simplify splitting bills among friends sharing the same receipt. It is a full-stack solution built with **Vite + React** on the frontend and **Node.js** on the backend, fully containerized using **Docker** for local development.
 
+> **⚠️ Note:** The application is still under development and not fully functional. Some features may be incomplete or subject to change.
 ---
 
 ## 🚀 Getting Started
 
-Follow these steps to set up and run the project on your local machine using Docker.
+Follow these steps to set up and run the project locally for development using Docker.
 
 ---
 
-## 📦 Prerequisites
+## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
+Ensure the following tools are installed on your system:
 
-- **Docker**: [Install Docker](https://www.docker.com/get-started)
+- **Docker**: [Get Docker](https://www.docker.com/get-started)
 - **Docker Compose**: Included with Docker Desktop
 
 ---
 
-## 🛠️ Installation & Running
+## 🛠️ Installation & Setup
 
 ### Step 1: Clone the Repository
 
-Clone the repository to your local machine and navigate to the project directory:
+Clone the repository and navigate to the project directory:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/mohBgz/SplitEase.git
+cd SplitEase
 ```
 
-### Step 2: Run the Project with Docker Compose
+### Step 2: Start the Development Environment with Docker Compose
 
-Build and start the project using Docker Compose:
+Build and launch the development environment using Docker Compose:
 
 ```bash
-docker-compose up --build
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
-Once the containers are running:
+Once running, access the application at:
 
-- The **frontend** (Vite React app) will be available at: [http://localhost:5173](http://localhost:5173)
-- The **backend** (Express app) will be available at: [http://localhost:5000](http://localhost:5000)
+- 🌐 **Frontend**: [http://localhost:5173](http://localhost:5173)
+- 🔌 **Backend**: [http://localhost:5000](http://localhost:5000)
+
+✅ **Hot Reload Enabled**  
+Changes in the source code will automatically reflect in the running containers.
 
 ---
 
-## 🧪 Testing with Real Bills
+## 🧪 Testing the Application
 
-You can test the bill upload feature using the following options:
+You can test the app in two ways:
 
-1. Use the sample bills provided in the `./backend/tests/data/` directory.
-2. Upload your own JSON bills via the frontend interface or using a tool like Postman.
+1. 📁 Use sample bills from `./backend/tests/data/`
+2. 📤 Upload your own `.json` bills via:
+    - The web interface
+    - Tools like Postman
 
 ---
 
-## 🔄 Hot Reload
 
-The app supports hot reload for both the frontend and backend. Any changes to the code will automatically reflect inside the running containers.
+> **Note:** This setup is optimized for development. Changes to the code will automatically reflect in the running containers.
+
+---

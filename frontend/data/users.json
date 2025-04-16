@@ -1,54 +1,38 @@
 [
     {
-        "name": "Mohamed",
+        "name": "John",
         "phone-number": "500500500",
         "isPayer": false
     },
     {
-        "name": "Ahmed",
+        "name": "Mike",
         "phone-number": "600600600",
         "isPayer": false
     },
     {
-        "name": "Adam",
+        "name": "Chris",
         "phone-number": "700700700",
         "isPayer": false
     },
     {
-        "name": "Riadh",
+        "name": "David",
         "phone-number": "800800800",
         "isPayer": false
     },
     {
-        "name": "Sylvain",
+        "name": "Paul",
         "phone-number": "900900900",
         "isPayer": false
     },
     {
-        "name": "John",
+        "name": "Anna",
         "phone-number": "100100100",
-        "isPayer": false
+        "isPayer": true
     },
     {
-        "name": "Jane",
+        "name": "Sophia",
         "phone-number": "200200200",
         "isPayer": false
-    },
-    {
-        "name": "Alice",
-        "phone-number": "300300300",
-        "isPayer": false
-    },
-    {
-        "name": "Bob",
-        "phone-number": "400400400",
-        "isPayer": false
-    },
-    {
-        "name": "Charlie",
-        "phone-number": "110110110",
-        "isPayer": false
     }
-
-
+    
 ]

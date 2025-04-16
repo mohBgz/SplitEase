@@ -88,7 +88,7 @@ function Item({ productName, indexProduct, onToggleProduct, isOpenProduct }) {
       </div>
 
       {isOpenProduct && (
-        <div className='text-xl flex justify-start items-center gap-4 rounded-md mt-4 p-2 bg-purple-900' 
+        <div className='text-xl flex justify-start items-center gap-4 rounded-md mt-4 p-2 bg-purple-900 hover:cursor-pointer' 
           onClick={toggleSelectAll}>
           <div className='text-gray-400' style={{textShadow: '3px 2px 5px rgba(0, 0, 0, 0.4)'}} >
             Select All
@@ -98,7 +98,7 @@ function Item({ productName, indexProduct, onToggleProduct, isOpenProduct }) {
             checked={selectAll}
             ref={inputRef}
             onChange={toggleSelectAll}
-            className='scale-[1.4]'
+            className='scale-[1.4] hover:cursor-pointer box-shadow-[0px_10px_25px_5px_rgba(239,_18,_243,_0.2)]'
           />
         </div>
       )}

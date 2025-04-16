@@ -13,6 +13,10 @@ const initialState = {
 
 const receiptReducer = (state, action) => {
     switch (action.type) {
+
+        case 'RESET_STATE':
+            return initialState; // Reset to initial state
+
         case 'SET_MODAL_ON':
             return { ...state, modalOn: action.payload };
 
