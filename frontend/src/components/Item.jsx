@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { IoPersonRemoveSharp, IoPersonAdd } from "react-icons/io5";
-import users from '../../../backend/tests/data/users.json'; // Import the users data from the JSON file
+import users from '../../data/users.json' ; // Import the users data from the JSON file
 
 function Item({ productName, indexProduct, onToggleProduct, isOpenProduct }) {
 

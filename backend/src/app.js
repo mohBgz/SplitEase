@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid'; // Ensure to import uuid at the top of the 
 const app = express();
 
 dotenv.config(); // Load environment variables from .env file
-const PORT = process.env.PORT;
+const PORT = 5000;
 let items = [];
 
 

@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "devStart": "nodemon ./backend/src/app.js"
+    "docker-build:dev": "docker build -t react-vite-app-image-dev:1.1 -f Dockerfile.dev .",
+    "docker-run:dev":"docker run -it -p 5173:5173 --name react-vite-app-dev -v my-node-modules-react:/app/node_modules -v C:/Users/Dell/Desktop/projects/my-app/frontend/:/app react-vite-app-image-dev:1.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

@@ -1,0 +1,17 @@
+FROM node:20-alpine
+
+ENV NODE_ENV=development
+
+WORKDIR /app
+
+# Only copy package.json + lock to install deps
+COPY package*.json ./
+
+RUN npm install
+
+# Let Docker know the port Vite uses
+EXPOSE 5173
+
+
+CMD ["npm", "run", "dev"]
+

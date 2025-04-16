@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useContext, useReducer } from "react";
 import { MdOutlineDownloading } from "react-icons/md";
 import Modal from "./Modal.jsx";
 import axios from "axios";
+import path from "path";
 import { GrUploadOption } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { validateFile } from "../utils/validateFile.js"; // Import validateFile function
@@ -9,6 +10,9 @@ import { initialState, receiptReducer } from "../reducers/receiptReducer.js"; //
 import  ReceiptContext  from "../contexts/ReceiptProvider.jsx"; // Import ReceiptContext
 
 const MainSection = () => {
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
   const { receipt, setReceipt } = useContext(ReceiptContext); // Use ReceiptContext for receipt state
 
@@ -76,12 +80,16 @@ useEffect(() => {
     dispatch({ type: "SET_PROGRESS", payload: { started: true, pc: 0 } });
 
     try {
-      const response = await axios.post("http://127.0.0.1:3000/api/uploads", formData, {
+      const response = await axios.post(
+       `${apiUrl}/uploads` , formData, {
         onUploadProgress: (progressEvent) => {
+          console.log("G");
           const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           dispatch({ type: "SET_PROGRESS", payload: { pc: percentage } });
         },
       });
+
+      console.log("Response", response.data);
 
       setReceipt(response.data); // Update receipt using context
       setMessageAndStore("Upload Successful");
@@ -108,6 +116,7 @@ useEffect(() => {
   };
 
   const triggerFileInput = () => {
+    setIsConfirmedAndStore(false); 
     fileInputRef.current.click();
   };
 
@@ -136,7 +145,7 @@ useEffect(() => {
                   
                   }}
                 >
-                  <span className="text-[2.8rem] font-bold mr-4">Resume Split</span>
+                  <span className="text-[2.8rem] font-bold mr-4">Resume Split </span>
                   <MdOutlineDownloading
                     style={{ transform: "scaleY(-1)" }}
                     className="text-[2.8rem]"

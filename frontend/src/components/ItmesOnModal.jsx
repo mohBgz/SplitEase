@@ -23,11 +23,15 @@ function ItemsOnModal({ receipt }) {
         <p>Loading...</p>
       ) : (
         items.map((item, index) => (
+          
           // isOpenProduct passed to each <Item/>: A boolean value that determines whether the item should be open or not (based on whether the openIndex matches the index of the item).
+         
+          
           <ItemOnModal
             key={index}
             productName={item.name}
           />
+          
         ))
       )}
     </div>
