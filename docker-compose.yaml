@@ -33,8 +33,9 @@ services:
     volumes:
       - ./backend:/app
       - node-modules-backend:/app/node_modules
-      - ./backend/uploads:/app/uploads  # 👈 Ensures Multer can access uploads folder
+      
     command: npm run dev
+    working_dir: /app
 
 volumes:
   node-modules-react-vite:

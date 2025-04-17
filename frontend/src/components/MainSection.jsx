@@ -88,6 +88,7 @@ const MainSection = () => {
   const handleUpload = async (file) => {
     if (!file) return;
 
+   
     const formData = new FormData();
     formData.append("file", file);
 

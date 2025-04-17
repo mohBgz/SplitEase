@@ -5,13 +5,13 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { hashFile } from './utils.js';
-import { v4 as uuidv4 } from 'uuid';
-import { error } from 'console';
 
-const app = express();
 dotenv.config();
 
+const app = express();
 const PORT = 5000;
+
+// Variables to store receipt data
 let items = [];
 let price = 0;
 let name = '';
@@ -32,17 +32,12 @@ const upload = multer({
     }
     cb(null, true);
   },
- 
 });
 
 // CORS configuration
 app.use(
   cors({
-    origin: [
-      'http://127.0.0.1:5173',
-      'http://localhost:5173',
-      'http://10.233.61.83:5173',
-    ],
+    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
   })
 );
 
@@ -53,23 +48,18 @@ app.post('/api/uploads', upload.single('file'), (req, res) => {
       return res.status(400).json({ data: null, error: true, status: 'No file uploaded.' });
     }
 
-
+    // Generate file hash and save the file
     const fileHash = hashFile(req.file.buffer);
     const fileName = `${fileHash}.json`;
     const filePath = path.join('./uploads', fileName);
-    
-    
-    
-   
+    fs.writeFileSync(filePath, req.file.buffer); // Override the file if it exists
 
-    fs.writeFileSync(filePath, req.file.buffer); //override the file if it exists
-    
-
-    // Read the JSON file
+    // Read and parse the JSON file
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const jsonItems = JSON.parse(fileContent);
     const array = jsonItems.body;
 
+    // Process the JSON data
     array.forEach((item, index) => {
       if (item.hasOwnProperty('sellLine')) {
         price = item.sellLine.total / 100;
@@ -109,22 +99,19 @@ app.post('/api/uploads', upload.single('file'), (req, res) => {
       }
     });
 
-    res.json({data: receipt, error: false, status: 'Bill uploaded successfully'});
+    res.json({ data: receipt, error: false, status: 'Bill uploaded successfully' });
   } catch (error) {
-    
+    console.error('[UPLOAD ERROR]', error);
     res.status(500).send('Error loading file');
   }
 });
 
 // GET Route to fetch receipt data
 app.get('/', (req, res) => {
-  res.json({
-    day: date,
-    items: items,
-  });
+  res.send('Backend is up and running!');
 });
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Express app listening at http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Express app listening at http://0.0.0.0:${PORT}`);
 });
