@@ -63,7 +63,6 @@ docker-compose -f docker-compose.dev.yml up --build
 - 🌐 **Frontend**: [http://localhost:5173](http://localhost:5173)
 - 🔌 **Backend**: [http://localhost:5000](http://localhost:5000)
 
-> ✅ **Hot Reload Enabled**: Changes in the source code will automatically reflect in the running containers.
 
 ---
 
@@ -109,4 +108,4 @@ You can test the app in two ways:
      - 🌐 The web interface
      - 🛠️ Tools like Postman
 
-> **💡 Note**: Both Docker and manual setups are optimized for development. Hot reload is supported in both environments.
+> **💡 Note**: Both Docker and manual setups are optimized for development. Hot reload is supported in both environments✅.
